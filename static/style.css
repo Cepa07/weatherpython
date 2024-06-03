@@ -583,7 +583,7 @@ article.container::before {
 
 .highlight-card .wrapper {
   justify-content: space-between;
-  gap: 16px;
+  gap: 100px;
 }
 
 .highlight-card .card-list {
