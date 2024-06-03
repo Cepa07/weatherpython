@@ -1,9 +1,12 @@
 import requests
 from config import api_key
 from datetime import datetime
+import locale
+
+locale.setlocale(locale.LC_TIME, 'ru_RU')
 
 def weather_days(city_name):
-    url = f'https://api.openweathermap.org/data/2.5/forecast?q={city_name}&units=metric&appid={api_key}'
+    url = f'https://api.openweathermap.org/data/2.5/forecast?q={city_name}&lang=ru&units=metric&appid={api_key}'
     response = requests.get(url)
     data = response.json()
     
@@ -16,9 +19,9 @@ def weather_days(city_name):
         
         if date.strftime('%Y-%m-%d') not in unique_dates and date.hour == 12:  # выбираем прогноз на полдень каждого дня
             weather_data = {
-                'date': date.strftime('%d %b'),
+                'date': date.strftime('%d %B'),
                 'day_of_week': date.strftime('%A'),
-                'temperature': entry['main']['temp_max'],
+                'temperature':  int( entry['main']['temp_max']),
                 'description': entry['weather'][0]['description'],
                 'icon': entry['weather'][0]['icon']
             }
